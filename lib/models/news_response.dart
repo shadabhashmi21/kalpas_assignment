@@ -10,7 +10,7 @@ class NewsResponse {
       int? statusCode,
       String? version, 
       String? access, 
-      List<Data>? data,}){
+      List<News>? data,}){
     _status = status;
     _statusCode = statusCode;
     _version = version;
@@ -26,7 +26,7 @@ class NewsResponse {
     if (json['data'] != null) {
       _data = [];
       json['data'].forEach((v) {
-        _data?.add(Data.fromJson(v));
+        _data?.add(News.fromJson(v));
       });
     }
   }
@@ -34,13 +34,13 @@ class NewsResponse {
   int? _statusCode;
   String? _version;
   String? _access;
-  List<Data>? _data;
+  List<News>? _data;
 
   String? get status => _status;
   int? get statusCode => _statusCode;
   String? get version => _version;
   String? get access => _access;
-  List<Data>? get data => _data;
+  List<News>? get data => _data;
 
   Map<String, dynamic> toJson() {
     final map = <String, dynamic>{};
@@ -62,13 +62,13 @@ class NewsResponse {
 /// link : "https://media.first.org/podcasts/FIRST-Impressions-Ed-Skoudis.mp3"
 /// published : "Fri, 03 Dec 2021 00:00:00 GMT"
 
-class Data {
-  Data({
+class News {
+  News({
       int? id, 
       String? title, 
       String? summary, 
       String? link, 
-      String? published,}){
+      String? published}){
     _id = id;
     _title = title;
     _summary = summary;
@@ -76,7 +76,7 @@ class Data {
     _published = published;
 }
 
-  Data.fromJson(dynamic json) {
+  News.fromJson(dynamic json) {
     _id = json['id'];
     _title = json['title'];
     _summary = json['summary'];
@@ -88,6 +88,7 @@ class Data {
   String? _summary;
   String? _link;
   String? _published;
+  bool isFavourite = false;
 
   int? get id => _id;
   String? get title => _title;
