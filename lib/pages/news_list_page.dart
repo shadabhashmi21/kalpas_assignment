@@ -23,13 +23,15 @@ class NewsListPage extends HookWidget {
           if (state is LoadingState) {
             return const Loading();
           } else if (state is ErrorState) {
-            /// todo - implement onPress
             return Error(
-                error: state.errorMessage ?? "", onRetryPressed: () {});
+                error: state.errorMessage ?? "",
+                onRetryPressed: () {
+                  BlocProvider.of<NewsCubit>(context).getNews();
+                });
           } else if (state is LoadedState<NewsResponse>) {
             newsList = state.data!.data!;
             return ListView.builder(
-                itemCount: newsList!.length,
+                itemCount: newsList.length,
                 itemBuilder: (context, index) {
                   var item = newsList[index];
                   return Card(
@@ -54,7 +56,6 @@ class NewsListPage extends HookWidget {
                               child: Column(
                                 crossAxisAlignment: CrossAxisAlignment.start,
                                 children: [
-                                  /// todo - make title bold
                                   Text(item.title ?? "",
                                       style: const TextStyle(
                                           color: Colors.black,
