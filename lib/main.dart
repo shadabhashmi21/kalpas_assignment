@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:kalpas_assignment/cubits/news_cubit.dart';
-import 'package:kalpas_assignment/pages/news_list_page.dart';
+import 'package:kalpas_assignment/models/news_response.dart';
+import 'package:kalpas_assignment/pages/dashboard_page.dart';
 import 'package:kalpas_assignment/repositories/news_repository.dart';
+import 'package:provider/provider.dart';
 
 void main() {
   runApp(const MyApp());
@@ -20,11 +22,11 @@ class MyApp extends StatelessWidget {
         primarySwatch: Colors.blue,
       ),
       home: BlocProvider<NewsCubit>(
-        create: (context) => NewsCubit(
-          repository: NewsRepository(),
-        ),
-        child: const NewsListPage()
-      ),
+          create: (context) => NewsCubit(
+                repository: NewsRepository(),
+              ),
+          child: Provider<List<News>>.value(
+              value: [], child: const DashboardPage())),
     );
   }
 }

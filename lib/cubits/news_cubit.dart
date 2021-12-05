@@ -12,7 +12,7 @@ class NewsCubit extends Cubit<DataState> {
 
   void getNews() async {
     try {
-      emit(LoadingState("loading..."));
+      emit(LoadingState("Getting data from API ..."));
       final news = await repository.getNews();
       if(news.data == null || news.data!.isEmpty) {
         throw Exception("No data found");
