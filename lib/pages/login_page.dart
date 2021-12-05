@@ -3,7 +3,17 @@ import 'dart:ui';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:hexcolor/hexcolor.dart';
+import 'package:kalpas_assignment/cubits/login_register_cubit.dart';
+import 'package:kalpas_assignment/cubits/news_cubit.dart';
+import 'package:kalpas_assignment/models/login_register_response.dart';
+import 'package:kalpas_assignment/models/news_response.dart';
+import 'package:kalpas_assignment/repositories/news_repository.dart';
+import 'package:kalpas_assignment/states/data_state.dart';
+import 'package:provider/provider.dart';
+
+import 'dashboard_page.dart';
 
 class LoginPage extends StatelessWidget {
   const LoginPage({Key? key}) : super(key: key);
@@ -12,6 +22,27 @@ class LoginPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final loginRegisterCubit = BlocProvider.of<LoginRegisterCubit>(context);
+
+    BlocListener<LoginRegisterCubit, DataState>(
+      listener: (context, state) {
+        if (state is LoadingState) {
+        } else if (state is LoadedState<LoginRegisterResponse>) {
+          /// todo - show message toast
+          Navigator.of(context).push(
+              MaterialPageRoute(builder: (context) {
+                return BlocProvider<NewsCubit>(
+                    create: (context) => NewsCubit(
+                      repository: NewsRepository(),
+                    ),
+                    child: Provider<List<News>>.value(
+                        value: [],
+                        child: const DashboardPage()));
+              }));
+        } else if (state is ErrorState) {}
+      },
+    );
+
     return Scaffold(
       body: SingleChildScrollView(
         child: Container(
@@ -99,6 +130,8 @@ class LoginPage extends StatelessWidget {
                                       margin: const EdgeInsets.only(top: 15),
                                       child: const Text(
                                         'Forgot Password?',
+
+                                        /// todo - show feature not implemented toast
                                         style: TextStyle(
                                             decoration:
                                                 TextDecoration.underline,
@@ -112,7 +145,12 @@ class LoginPage extends StatelessWidget {
                             Container(
                               margin: const EdgeInsets.only(top: 15),
                               child: ElevatedButton(
-                                onPressed: () {},
+                                onPressed: () {
+
+
+                                  /// todo
+                                  ///loginRegisterCubit.doLogin(LoginRegisterRequest("", ""))
+                                },
                                 child: const Padding(
                                   padding: EdgeInsets.symmetric(
                                       vertical: 10, horizontal: 20),
@@ -144,6 +182,8 @@ class LoginPage extends StatelessWidget {
                                     'assets/google.png',
                                     width: socialIconSize,
                                     height: socialIconSize,
+
+                                    /// todo - show feature not implemented toast
                                   ),
                                   const SizedBox(
                                     width: 10,
@@ -152,6 +192,8 @@ class LoginPage extends StatelessWidget {
                                     'assets/facebook.png',
                                     width: socialIconSize,
                                     height: socialIconSize,
+
+                                    /// todo - show feature not implemented toast
                                   ),
                                 ],
                               ),
@@ -170,7 +212,7 @@ class LoginPage extends StatelessWidget {
                                             color: Colors.orange),
                                         recognizer: TapGestureRecognizer()
                                           ..onTap = () {
-                                            /// todo
+                                            /// todo - show feature not implemented toast
                                           }),
                                   ],
                                 ),

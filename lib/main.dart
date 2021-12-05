@@ -1,9 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:kalpas_assignment/cubits/login_register_cubit.dart';
 import 'package:kalpas_assignment/cubits/news_cubit.dart';
 import 'package:kalpas_assignment/models/news_response.dart';
 import 'package:kalpas_assignment/pages/dashboard_page.dart';
 import 'package:kalpas_assignment/pages/login_page.dart';
+import 'package:kalpas_assignment/repositories/login_register_repository.dart';
 import 'package:kalpas_assignment/repositories/news_repository.dart';
 import 'package:provider/provider.dart';
 
@@ -22,9 +24,9 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         primarySwatch: Colors.blue,
       ),
-      home: BlocProvider<NewsCubit>(
-          create: (context) => NewsCubit(
-                repository: NewsRepository(),
+      home: BlocProvider<LoginRegisterCubit>(
+          create: (context) => LoginRegisterCubit(
+                repository: LoginRegisterRepository(),
               ),
           /*child: Provider<List<News>>.value(
               value: const [], child: const DashboardPage())*/
