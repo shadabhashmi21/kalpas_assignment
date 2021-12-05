@@ -1,5 +1,3 @@
-import 'dart:convert';
-
 import 'package:kalpas_assignment/models/login_register_request.dart';
 import 'package:kalpas_assignment/models/login_register_response.dart';
 import 'package:kalpas_assignment/network/api.dart';
@@ -17,10 +15,9 @@ class LoginRegisterRepository extends BaseRepository {
       LoginRegisterRequest loginRegisterRequest) async {
     ///final apiResponse = await api.post('login', loginRegisterRequest);
     /// mocking success
-    final apiResponse = jsonDecode(
-        "{\n\"status\": \"login successful\",\n\"status-code\": 200,\n}");
-    handleApiErrors(apiResponse);
-    return LoginRegisterResponse.fromJson(apiResponse);
+    /* final apiResponse = jsonDecode('{\n"status": "login successful",\n"status-code": 200,\n}');
+    handleApiErrors(apiResponse);*/
+    return LoginRegisterResponse(status: "login successful", statusCode: 200);
   }
 
   @override

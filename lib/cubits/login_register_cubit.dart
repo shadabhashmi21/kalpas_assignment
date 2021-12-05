@@ -11,7 +11,16 @@ class LoginRegisterCubit extends Cubit<DataState> {
 
   void doLogin(LoginRegisterRequest loginRegisterRequest) async {
     try {
-      /// todo - add validations
+      if (loginRegisterRequest.email == null ||
+          loginRegisterRequest.email!.isEmpty) {
+        emit(ErrorPromptState('Invalid Email'));
+        return;
+      }
+      if (loginRegisterRequest.password == null ||
+          loginRegisterRequest.password!.isEmpty) {
+        emit(ErrorPromptState('Invalid Password'));
+        return;
+      }
       emit(LoadingState("Signing in ..."));
       final data = await repository.doLogin(loginRegisterRequest);
       emit(LoadedState<LoginRegisterResponse>("success", data));

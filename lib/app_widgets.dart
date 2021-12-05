@@ -126,3 +126,29 @@ class NewsCard extends StatelessWidget {
         ));
   }
 }
+
+class CustomDialog extends StatelessWidget {
+  final String text;
+
+  const CustomDialog({Key? key, required this.text}) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return AlertDialog(
+        content: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          crossAxisAlignment: CrossAxisAlignment.center,
+          mainAxisSize: MainAxisSize.min,
+          children: [
+            const CircularProgressIndicator(),
+            Padding(
+              padding: const EdgeInsets.only(top: 10, bottom: 5),
+              child: Text(
+                text,
+                textAlign: TextAlign.center,
+              ),
+            )
+          ],
+        ));
+  }
+}

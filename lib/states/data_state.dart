@@ -1,13 +1,15 @@
 import 'package:equatable/equatable.dart';
 
-abstract class DataState extends Equatable {}
+abstract class DataState {}
 
-class InitialState extends DataState {
+abstract class DataEquitableState extends Equatable implements DataState {}
+
+class InitialState extends DataEquitableState {
   @override
   List<Object> get props => [];
 }
 
-class LoadingState extends DataState {
+class LoadingState extends DataEquitableState {
   final String? loadingMessage;
 
   LoadingState(this.loadingMessage);
@@ -16,7 +18,7 @@ class LoadingState extends DataState {
   List<String?> get props => [loadingMessage];
 }
 
-class LoadedState<T> extends DataState {
+class LoadedState<T> extends DataEquitableState {
   final String? successMessage;
   final T? data;
 
@@ -26,11 +28,17 @@ class LoadedState<T> extends DataState {
   List<T?> get props => [data];
 }
 
-class ErrorState extends DataState {
+class ErrorState extends DataEquitableState {
   final String? errorMessage;
 
   ErrorState(this.errorMessage);
 
   @override
   List<String?> get props => [errorMessage];
+}
+
+class ErrorPromptState extends DataState {
+  final String? errorMessage;
+
+  ErrorPromptState(this.errorMessage);
 }
