@@ -170,6 +170,13 @@ packages:
     description: flutter
     source: sdk
     version: "0.0.0"
+  hexcolor:
+    dependency: "direct main"
+    description:
+      name: hexcolor
+      url: "https://pub.dartlang.org"
+    source: hosted
+    version: "2.0.5"
   http:
     dependency: "direct main"
     description:
@@ -338,4 +345,4 @@ packages:
     version: "5.3.1"
 sdks:
   dart: ">=2.15.0-116.0.dev <3.0.0"
-  flutter: ">=1.20.0"
+  flutter: ">=2.0.1"

@@ -3,6 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:kalpas_assignment/cubits/news_cubit.dart';
 import 'package:kalpas_assignment/models/news_response.dart';
 import 'package:kalpas_assignment/pages/dashboard_page.dart';
+import 'package:kalpas_assignment/pages/login_page.dart';
 import 'package:kalpas_assignment/repositories/news_repository.dart';
 import 'package:provider/provider.dart';
 
@@ -25,8 +26,10 @@ class MyApp extends StatelessWidget {
           create: (context) => NewsCubit(
                 repository: NewsRepository(),
               ),
-          child: Provider<List<News>>.value(
-              value: [], child: const DashboardPage())),
+          /*child: Provider<List<News>>.value(
+              value: const [], child: const DashboardPage())*/
+        child: const LoginPage(),
+      ),
     );
   }
 }
