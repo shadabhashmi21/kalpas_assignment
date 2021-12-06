@@ -1,13 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:kalpas_assignment/cubits/login_register_cubit.dart';
-import 'package:kalpas_assignment/cubits/news_cubit.dart';
-import 'package:kalpas_assignment/models/news_response.dart';
-import 'package:kalpas_assignment/pages/dashboard_page.dart';
 import 'package:kalpas_assignment/pages/login_page.dart';
 import 'package:kalpas_assignment/repositories/login_register_repository.dart';
-import 'package:kalpas_assignment/repositories/news_repository.dart';
-import 'package:provider/provider.dart';
 
 void main() {
   runApp(const MyApp());
@@ -20,6 +15,7 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
+      debugShowCheckedModeBanner: false,
       title: 'Flutter Demo',
       theme: ThemeData(
         primarySwatch: Colors.blue,

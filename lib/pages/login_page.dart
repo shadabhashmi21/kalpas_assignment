@@ -30,18 +30,21 @@ class LoginPage extends HookWidget {
 
     final _emailTextController = useState(TextEditingController());
     final _passwordTextController = useState(TextEditingController());
+    bool _isDialogVisible = false;
+
 
     showProgressDialog(BuildContext context, String text) {
+      _isDialogVisible = true;
       showDialog(
           barrierDismissible: false,
           context: context,
           builder: (BuildContext context) {
             return CustomDialog(text: text);
-          });
+          }).then((value) => _isDialogVisible = false);
     }
 
     dismissProgressDialog() {
-      Navigator.pop(context);
+      if(_isDialogVisible) Navigator.pop(context);
     }
 
     return Scaffold(
